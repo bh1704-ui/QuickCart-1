@@ -1,6 +1,14 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 
 const NewsLetter = () => {
+  const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+    setMounted(true);
+    }, []);
+
+  if (!mounted) return null;
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-2 pt-8 pb-14">
       <h1 className="md:text-4xl text-2xl font-medium">

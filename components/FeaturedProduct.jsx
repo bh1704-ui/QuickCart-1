@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 
@@ -24,6 +24,14 @@ const products = [
 ];
 
 const FeaturedProduct = () => {
+  const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
+
+if (!mounted) return null;
+
   return (
     <div className="mt-14">
       <div className="flex flex-col items-center">

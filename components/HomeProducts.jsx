@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useAppContext } from "@/context/AppContext";
 
 const HomeProducts = () => {
 
   const { products, router } = useAppContext()
+
+  
+  // ✅ hydration guard
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // ⛔ prevent server/client mismatch
+  if (!mounted) return null;
 
   return (
     <div className="flex flex-col items-center pt-14">

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 
+
+
 const HeaderSlider = () => {
   const sliderData = [
     {
@@ -31,14 +33,23 @@ const HeaderSlider = () => {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(()=> {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if(!mounted) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderData.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [sliderData.length]);
+  }, [mounted,sliderData.length]);
 
+  if(!mounted) return null;
+  
   const handleSlideChange = (index) => {
     setCurrentSlide(index);
   };
